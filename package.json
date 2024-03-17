@@ -9,7 +9,7 @@
     "format": "eslint src/**/*.ts --fix"
   },
   "lint-staged": {
-    "*": "prettier --write",
+    "*": "prettier --config .prettierrc . --write",
     "*.ts": "eslint --fix"
   },
   "keywords": [],

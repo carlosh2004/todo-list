@@ -1,5 +1,6 @@
 import { pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
-import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { z } from 'zod';
 
 export const tasks = pgTable('tasks', {
   id: serial('id').primaryKey(),
@@ -13,5 +14,7 @@ export const tasks = pgTable('tasks', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
-export type Tasks = InferSelectModel<typeof tasks>;
-export type NewTasks = InferInsertModel<typeof tasks>;
+export const insertTaskSchema = createInsertSchema(tasks);
+export const selectTaskSchema = createSelectSchema(tasks);
+export type Tasks = z.infer<typeof selectTaskSchema>;
+export type NewTasks = z.infer<typeof insertTaskSchema>;

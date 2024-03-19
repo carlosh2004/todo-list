@@ -34,7 +34,7 @@ async function createTask({ title, description, status, due_date }: NewTasks): P
 
     return result[0];
   } catch (error) {
-    throw new Error(`Error in create: ${(error as Error).message}`);
+    throw new Error(`Error in createTask: ${(error as Error).message}`);
   }
 }
 
@@ -48,7 +48,7 @@ async function updateTaskById(id: number, { title, description, status, due_date
 
     return result[0];
   } catch (error) {
-    throw new Error(`Error in create: ${(error as Error).message}`);
+    throw new Error(`Error in updateTaskById: ${(error as Error).message}`);
   }
 }
 
@@ -57,7 +57,7 @@ async function deleteTaskById(id: number): Promise<Tasks> {
     const result = await db.delete(tasks).where(eq(tasks.id, id)).returning();
     return result[0];
   } catch (error) {
-    throw new Error(`Error in create: ${(error as Error).message}`);
+    throw new Error(`Error in deleteTaskById: ${(error as Error).message}`);
   }
 }
 
